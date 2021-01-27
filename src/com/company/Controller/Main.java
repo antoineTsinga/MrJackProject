@@ -1,5 +1,6 @@
 package com.company.Controller;
 
+import com.company.Model.Partie;
 import java.util.Scanner;
 
 public class Main {

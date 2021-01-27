@@ -50,7 +50,10 @@ public class Partie {
         System.out.println("Celui qui jouera le role de MrJack est " + mrJack.getNom());
 
         alibiRestante = createStackAlibi();
+        Alibi yu = alibiRestante.get(0);
+        String vu = yu.getPersonnage();
         mrJack.setIdentite(alibiRestante.remove(0));
+        System.out.println("Seulement MrJack peut voir cette information, veuillez regarder tout à gauche pour découvrir votre identité                                           " + " l'identité de MrJack est "+ vu);
     }
 
     private void initialisationJeton() {

@@ -1,6 +1,4 @@
-package com.company.Controller;
-
-import com.company.Model.*;
+package com.company.Model;
 
 import java.util.*;
 
@@ -206,17 +204,6 @@ public class Partie {
 
     public boolean mrJackEnVue(){
         return enqueteur.mrJackVue(mrJack.getIdentite());
-    }
-
-    public void finPartie() {
-        System.out.println("La partie est terminée, voulez-vous en recommencer ? (y/n)");
-        String choix = scanner.next();
-        switch (choix){
-            case "y" :
-                play();
-            case "n":
-                System.out.println("merci d'avoir joué");
-        }
     }
 
     public void jouerTour(int tour) {
@@ -480,7 +467,7 @@ public class Partie {
                                     str = str + " " + detective1.getNom();
                                 }
                             }
-                            System.out.printf("|-%19s|\n", str);
+                            System.out.printf("|%-19s|\n", str);
                         }
                         else {
                             String str = "";
@@ -517,10 +504,10 @@ public class Partie {
                     District district = (District) plateau[i][j];
                     if (district.getAlibi() != null){
                         String str = district.getAlibi().getPersonnage() + donneOrientation(district);
-                        System.out.printf("|%-18s|", str );
+                        System.out.printf("|%-19s|", str );
                     }
                     else {
-                        System.out.printf("|%-18s|", donneOrientation(district));
+                        System.out.printf("|%-19s|", donneOrientation(district));
                     }
                 }
             }
@@ -533,10 +520,10 @@ public class Partie {
         boolean est = district.isEst();
         boolean ouest = district.isOuest();
         String orientation = "";
-        if (ouest) orientation = orientation + "◄";
-        if (nord) orientation = orientation + "▲";
-        if(sud) orientation = orientation + "▼";
-        if(est) orientation = orientation + "►";
+        if (!ouest)orientation  = orientation + " ├";
+        else if (!nord) orientation = orientation + " ┬";
+        else if(!sud) orientation = orientation + " ┴";
+        else if(!est) orientation = orientation + " ┤";
         return orientation;
     }
 

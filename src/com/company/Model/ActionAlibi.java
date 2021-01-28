@@ -49,8 +49,8 @@ public class ActionAlibi extends Action{
                     }
                 }
             }
+            System.out.println(alibi.getPersonnage());
         }
-        System.out.println("fait");
     }
 
     public String getNomFace() {

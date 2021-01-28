@@ -2,7 +2,6 @@ package com.company.Model;
 
 import java.util.*;
 
-import static com.company.Controller.Main.play;
 
 
 public class Partie {
@@ -44,14 +43,14 @@ public class Partie {
         mrJack.setNom(nomJoueursL.remove(0));
         mrJack.setType("mrJack");
 
-        System.out.println("Celui qui jouera le role de l'Enqueteur est " + enqueteur.getNom());
-        System.out.println("Celui qui jouera le role de MrJack est " + mrJack.getNom());
+        System.out.println("Celui qui jouera le rôle de l'Enqueteur est " + enqueteur.getNom());
+        System.out.println("Celui qui jouera le rôle de MrJack est " + mrJack.getNom());
+        System.out.println();
 
         alibiRestante = createStackAlibi();
-        Alibi yu = alibiRestante.get(0);
-        String vu = yu.getPersonnage();
         mrJack.setIdentite(alibiRestante.remove(0));
-        System.out.println("Seulement MrJack peut voir cette information, veuillez regarder tout à gauche pour découvrir votre identité                                           " + " l'identité de MrJack est "+ vu);
+        System.out.println("Seulement MrJack peut voir cette information, veuillez regarder tout à gauche pour découvrir votre identité >>>>>>                                          " + " l'identité de MrJack est "+ mrJack.getIdentite().getPersonnage());
+        System.out.println();
     }
 
     private void initialisationJeton() {
@@ -184,16 +183,8 @@ public class Partie {
         return enqueteur;
     }
 
-    public void setEnqueteur(Enqueteur enqueteur) {
-        this.enqueteur = enqueteur;
-    }
-
     public MrJack getMrJack() {
         return mrJack;
-    }
-
-    public void setMrJack(MrJack mrJack) {
-        this.mrJack = mrJack;
     }
 
     public boolean gagnerEnMemeTemps(){
@@ -215,7 +206,7 @@ public class Partie {
         afficherPlateau();
         appelATemoin();
 
-        System.out.println("mrJack à " + mrJack.getNbSablier() + "sablier(s)" + '\n' + "il reste" + enqueteur.getNbSuspectRestant() + "suspect(s) à l'enqueteur");
+        System.out.println("mrJack a " + mrJack.getNbSablier() + " sablier(s)" + '\n' + "il reste " + enqueteur.getNbSuspectRestant() + " suspect(s) à l'enqueteur");
     }
 
     private void traque(int tour) {
@@ -300,9 +291,11 @@ public class Partie {
             for (int i = 1; i <= 3; i++) {
                 for (int j = 1; j <= 3; j++) {//partie du tableau reservée aux districtes
                     if (!districtEnVue((District) plateau[i][j], enqueteur.getAlibiEnVue())) {//on teste si l'element en position i,j n'est pas dans la liste des suspect en vue, si c'est pas le cas on le retourne
-                        ((District) plateau[i][j]).setAlibi(null);
                         int nbSuspectRestant = enqueteur.getNbSuspectRestant();
-                        nbSuspectRestant--;
+                        if (((District) (plateau[i][j])).getAlibi() !=null){
+                            ((District) plateau[i][j]).setAlibi(null);
+                            nbSuspectRestant--;
+                        }
                         enqueteur.setNbSuspectRestant(nbSuspectRestant);
                     }
                 }
@@ -312,9 +305,11 @@ public class Partie {
             for (int i = 1; i <= 3; i++) {
                 for (int j = 1; j <= 3; j++) {
                     if (districtEnVue((District) plateau[i][j], enqueteur.getAlibiEnVue())) { //les personnage en vue sont innocentés
-                        ((District) plateau[i][j]).setAlibi(null);
                         int nbSuspectRestant = enqueteur.getNbSuspectRestant();
-                        nbSuspectRestant--;
+                        if (((District) (plateau[i][j])).getAlibi() !=null){
+                            ((District) plateau[i][j]).setAlibi(null);
+                            nbSuspectRestant--;
+                        }
                         enqueteur.setNbSuspectRestant(nbSuspectRestant);
                     }
                 }
@@ -460,44 +455,44 @@ public class Partie {
                 if (!((1 <= i && i <= 3) && (1 <= j && j <= 3))) {
                     Detective detective = (Detective) plateau[i][j];
                     if(j==4){ // lorsqu'on affiche les chaine de caractère formatées on doit revenir car j = 4, donc le bord du tableau
+                        StringBuilder str;
                         if(detective.getNom() != null) {
-                            String str = detective.getNom();
+                            str = new StringBuilder(detective.getNom());
                             for(Detective detective1 : detectives){ //on verifie s'il n'y pas d'autres détectives au même endroit
                                 if ( detective1.getLigne() == i && detective1.getColonne() == j && !detective1.getNom().equals(detective.getNom())){
-                                    str = str + " " + detective1.getNom();
+                                    str.append(" ").append(detective1.getNom());
                                 }
                             }
-                            System.out.printf("|%-19s|\n", str);
                         }
                         else {
-                            String str = "";
+                            str = new StringBuilder();
                             for(Detective detective1 : detectives){ //on verifie s'il n'y pas d'autres détectives au même endroi
                                 if ( detective1.getLigne() == i && detective1.getColonne() == j && !detective1.getNom().equals(detective.getNom())){
-                                    str = str + " " + detective1.getNom();
+                                    str.append(" ").append(detective1.getNom());
                                 }
                             }
-                            System.out.printf("|%-19s|\n", str);
                         }
+                        System.out.printf("|%-19s|\n", str.toString());
                     }
                     else {
+                        StringBuilder str;
                         if(detective.getNom() != null) {
-                            String str = detective.getNom();
+                            str = new StringBuilder(detective.getNom());
                             for(Detective detective1 : detectives){ //on verifie s'il n'y pas d'autres détectives au même endroi
                                 if ( detective1.getLigne() == i && detective1.getColonne() == j && !detective1.getNom().equals(detective.getNom())){
-                                    str = str + " " + detective1.getNom();
+                                    str.append(" ").append(detective1.getNom());
                                 }
                             }
-                            System.out.printf("|%-19s|", str);
                         }
                         else {
-                            String str = "";
+                            str = new StringBuilder();
                             for(Detective detective1 : detectives){ //on verifie s'il n'y pas d'autres détectives au même endroi
                                 if ( detective1.getLigne() == i && detective1.getColonne() == j && !detective1.getNom().equals(detective.getNom())){
-                                    str = str + " " + detective1.getNom();
+                                    str.append(" ").append(detective1.getNom());
                                 }
                             }
-                            System.out.printf("|%-19s|", str);
                         }
+                        System.out.printf("|%-19s|", str.toString());
                     }
                 }
                 else {
@@ -512,6 +507,7 @@ public class Partie {
                 }
             }
         }
+        System.out.println();
     }
 
     private String donneOrientation(District district){

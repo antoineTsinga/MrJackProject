@@ -39,7 +39,14 @@ public class Enqueteur extends Joueur {
     }
 
     public boolean mrJackVue(Alibi identiteMrJack) {
-        return AlibiEnVue.contains(identiteMrJack);
+        for (District district: AlibiEnVue){
+            if (district.getAlibi()!=null) {
+                if (district.getAlibi().getPersonnage().equals(identiteMrJack.getPersonnage())) {
+                    return true;
+                }
+            }
+        }
+        return false;
     }
 }
 

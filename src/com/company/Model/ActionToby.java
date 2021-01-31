@@ -34,7 +34,7 @@ public class ActionToby extends Action {
     @Override
     public void makeAction(Joueur joueur, Detective sherlock, Detective watson, Detective toby, Stack<Alibi> alibiRestant, Tile[][] plateau, ArrayList<District> DistrictNonRetournes){
         System.out.println("faire ActionToby");
-        System.out.println("De combien d'espace voulez-vous deplacer toby?");
+        System.out.println("De combien d'espace voulez-vous deplacer toby? 1 ou 2");
         int nbEspace = scanner.nextInt();
         makeActionToby(toby, plateau, nbEspace);
     }

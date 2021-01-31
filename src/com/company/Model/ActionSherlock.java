@@ -33,7 +33,7 @@ public class ActionSherlock extends Action{
     @Override
     public void makeAction(Joueur joueur, Detective sherlock, Detective watson, Detective toby, Stack<Alibi> alibiRestant, Tile[][] plateau, ArrayList<District> DistrictRonNetournes){
         System.out.println("faire ActionSherlock");
-        System.out.println("De combien d'espace voulez-vous deplacer sherlock?");
+        System.out.println("De combien d'espace voulez-vous deplacer sherlock? 1 ou 2");
         int nbEspace = scanner.nextInt();
         makeActionSherlock(sherlock, plateau, nbEspace);
 

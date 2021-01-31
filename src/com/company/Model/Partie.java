@@ -2,8 +2,6 @@ package com.company.Model;
 
 import java.util.*;
 
-
-
 public class Partie {
     private Tile[][] plateau;
     private Stack<Alibi> alibiRestante;

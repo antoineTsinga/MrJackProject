@@ -4,8 +4,9 @@ import java.util.ArrayList;
 import java.util.Stack;
 
 public abstract class Action {
+    private String nomFace;
     public String getNom(){
-        return "action";
+        return nomFace;
     }
     public void setNom(String nomFace){
 
